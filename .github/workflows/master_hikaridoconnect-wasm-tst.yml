@@ -22,8 +22,11 @@ jobs:
           dotnet-version: '7.x'
           include-prerelease: true
 
-      - name: Change directory to your project directory
-        run: cd DemoBlazorApp
+      - name: Check directories
+        run: ls
+
+      - name: Check directories
+        run: cd ./DemoBlazorApp
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
