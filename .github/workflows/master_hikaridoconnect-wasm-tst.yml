@@ -24,7 +24,7 @@ jobs:
           include-prerelease: true
 
       - name: Change directory to your project directory
-        run: cd DemoBlazorApp-WASM/DemoBlazorApp
+        run: cd DemoBlazorApp
 
       - name: Build with dotnet
         run: dotnet build -c Release -p:Configuration=Release
