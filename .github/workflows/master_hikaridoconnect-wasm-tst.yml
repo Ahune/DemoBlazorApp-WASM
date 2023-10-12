@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - HikaridoConnect-WASM-
 on:
   push:
     branches:
-      - Master
+      - master
   workflow_dispatch:
 
 jobs:
@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -22,17 +23,14 @@ jobs:
           dotnet-version: '7.x'
           include-prerelease: true
 
-      - name: Check directories
-        run: ls
-
-      - name: Check directories
-        run: cd DemoBlazorApp
+      - name: Change directory to your project directory
+        run: cd DemoBlazorApp-WASM/DemoBlazorApp
 
       - name: Build with dotnet
-        run: dotnet build -c Release DemoBlazorApp.csproj
+        run: dotnet build -c Release -p:Configuration=Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp -p:Configuration=Release
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
