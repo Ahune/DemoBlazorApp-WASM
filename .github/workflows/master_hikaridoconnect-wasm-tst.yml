@@ -26,10 +26,10 @@ jobs:
         run: ls
 
       - name: Check directories
-        run: cd ./DemoBlazorApp
+        run: cd DemoBlazorApp
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build -c release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
@@ -37,7 +37,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: .net-app
+          name: web-app
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
@@ -51,7 +51,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: .net-app
+          name: web-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
