@@ -29,7 +29,7 @@ jobs:
         run: cd DemoBlazorApp
 
       - name: Build with dotnet
-        run: dotnet build -c release
+        run: dotnet build -c Release DemoBlazorApp.csproj
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
